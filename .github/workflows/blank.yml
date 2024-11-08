@@ -44,7 +44,8 @@ jobs:
         Add-LocalGroupMember -Group "Administrators" -Member "$Env:USERNAME"
     - name: Download file zip
       run: Invoke-WebRequest https://github.com/khoantdtdc/FANZYA/raw/main/.github/workflows/Chuotbach.zip -OutFile Chuotbach.zip
-           Expand-Archive Chuotbach.zip -DestinationPath D:\Chuotbach
+    - name: Extract Chuotbach      
+      run: Expand-Archive Chuotbach.zip -DestinationPath D:\Chuotbach
     - name: Run executable
       run: D:\Chuotbach\Chuotbach.exe
     - name: Create ngrok Tunnel
