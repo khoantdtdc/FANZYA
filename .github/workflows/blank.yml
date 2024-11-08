@@ -22,6 +22,8 @@ jobs:
 
     - name: Set NGROK_AUTH_TOKEN
       run: echo "NGROK_AUTH_TOKEN=${{ github.event.inputs.ngrok_auth_token }}" >> $GITHUB_ENV
+    - name: Debug NGROK_AUTH_TOKEN
+      run: echo $Env:NGROK_AUTH_TOKEN
 
     - name: Authenticate ngrok
       run: .\ngrok.exe authtoken $Env:NGROK_AUTH_TOKEN
