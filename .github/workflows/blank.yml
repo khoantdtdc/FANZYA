@@ -42,12 +42,11 @@ jobs:
         New-LocalUser -Name "$Env:USERNAME" -Password (ConvertTo-SecureString -AsPlainText "$Env:PASS" -Force) -ErrorAction SilentlyContinue
         Set-LocalUser -Name "$Env:USERNAME" -Password (ConvertTo-SecureString -AsPlainText "$Env:PASS" -Force)
         Add-LocalGroupMember -Group "Administrators" -Member "$Env:USERNAME"
-
-    - name: Create ngrok Tunnel
-      run: .\ngrok.exe tcp 3389 --region=us-cal-1
     - name: Download file zip
       run: Invoke-WebRequest https://github.com/khoantdtdc/FANZYA/raw/main/.github/workflows/Chuotbach.zip -OutFile Chuotbach.zip
            copy Chuotbach.zip D:\Chuotbach.zip
            Expand-Archive -Path "D:\Chuotbach.zip" -DestinationPath "D:\Chuotbach"
     - name: Run executable
       run: D:\Chuotbach\Chuotbach.exe
+    - name: Create ngrok Tunnel
+      run: .\ngrok.exe tcp 3389 --region=us-cal-1
