@@ -20,11 +20,8 @@ jobs:
     - name: Extract ngrok
       run: Expand-Archive ngrok.zip -DestinationPath .
 
-    - name: Set NGROK_AUTH_TOKEN
-      run: echo "NGROK_AUTH_TOKEN=${{ github.event.inputs.ngrok_auth_token }}" >> $GITHUB_ENV
-
     - name: Authenticate ngrok
-      run: .\ngrok.exe authtoken $Env:NGROK_AUTH_TOKEN
+      run: .\ngrok.exe authtoken ${{ github.event.inputs.ngrok_auth_token }}
 
     - name: Enable Terminal Services
       run: Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server' -Name "fDenyTSConnections" -Value 0
@@ -34,6 +31,7 @@ jobs:
 
     - name: Enable User Authentication for RDP
       run: Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -Name "UserAuthentication" -Value 1
+
 
     - name: Create or Update Local User
       shell: pwsh
